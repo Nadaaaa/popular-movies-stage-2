@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -62,11 +63,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
     }
 
     private void loadMovies() {
-        if (movieList == null || movieList.isEmpty()) {
-            makeMovieSearchQuery();
-        } else {
-            mMovieAdapter.setMovieData(movieList);
-        }
+        makeMovieSearchQuery();
+//        if (movieList == null || movieList.isEmpty()) {
+//            makeMovieSearchQuery();
+//        } else {
+//            mMovieAdapter.setMovieData(movieList);
+//        }
     }
 
     @Override
@@ -166,6 +168,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
                 if(favs.size()>0) {
                     favMovs.clear();
                     favMovs = favs;
+                }
+                for (int i=0; i<favMovs.size(); i++) {
+                    Log.d(TAG,favMovs.get(i).getTitle());
                 }
                 loadMovies();
             }
