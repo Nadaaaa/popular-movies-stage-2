@@ -206,13 +206,18 @@ public class MovieDetails extends AppCompatActivity  implements TrailerAdapter.L
                         if (isFav) {
                             // delete item
                             mDb.movieDao().deleteMovie(mov);
-                            setFavorite(false);
                         } else {
                             // insert item
                             mDb.movieDao().insertMovie(mov);
-                            setFavorite(true);
                         }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                setFavorite(!isFav);
+                            }
+                        });
                     }
+
                 });
             }
         });
